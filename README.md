@@ -1,6 +1,6 @@
 # TheAveron
 
-My project (majority in french because I am)
+## My projects (majority in french because I am)
 
 [Wikispace](https://theaveron.github.io/Wikispace): a website with some informations about the Stellar System
 
