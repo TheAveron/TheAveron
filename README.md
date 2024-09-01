@@ -6,4 +6,4 @@
 
 [Whack an Asteroid](https://github.com/TheAveron/Whack-an-Asteroid/releases): a little adaptation of the famous whack a mole game.
 
-[ISS Vision](https://github.com/TheAveron/ISS-explorer): a little website made with flask to show were is the ISS.
+[ISS Vision](https://github.com/TheAveron/ISS-Vision): a little website made with flask to show were is the ISS.
