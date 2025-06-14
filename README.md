@@ -51,6 +51,4 @@
 
 ---
 
-<sub>
-“To confine our attention to terrestrial matters would be to limit the human spirit.” — Stephen Hawking
-</sub>
+> “To confine our attention to terrestrial matters would be to limit the human spirit.” — Stephen Hawking
