@@ -15,7 +15,7 @@
 
 ## 🛰️ About Me
 
-- Student in the French MPSI preparatory program
+- Student in the French MP preparatory program
 - Passionate about science, astronomy, and building creative tools
 - Enjoys turning curiosity into code—especially when it comes to space!
 
