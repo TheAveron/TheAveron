@@ -1,6 +1,6 @@
 # TheAveron 🌠
 
-**MPSI Student | Explorer of Science, Space & Code**
+**MP Student | Explorer of Science, Space & Code**
 
 ---
 
