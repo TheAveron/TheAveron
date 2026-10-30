@@ -1,0 +1,452 @@
+<!doctype html>
+<!--
+  THEME SWITCH: edit the two attributes on the <html> tag below.
+    data-palette = auto | stone | sage | lagoon | bloom | nocturne | polar
+                   "auto" follows the browser: Polar in light mode, Nocturne in dark mode.
+    data-layout  = side | cards | editorial | banded | timeline
+  All palettes and structures stay defined in the CSS, nothing else needs to change.
+-->
+<html lang="en" data-palette="auto" data-layout="banded">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Victor Averseng · Portfolio</title>
+<meta name="description" content="Victor Averseng, MP preparatory student and Python developer, aiming to work on space data analysis and on the guidance and automation of space vehicles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     PALETTES  (stone = original · sage / lagoon / bloom = your sets)
+     --signal: decorative + buttons   --accent: coloured text
+     --hero-*: dark/inverse bands used by some layouts
+     Text shades marked (derived) are darker/mixed versions of the set,
+     added only so body text stays readable.
+     ========================================================= */
+  :root, [data-palette="stone"]{
+    --bg:#d8d5cd; --ink:#1d1c1a; --soft:#4b4944; --rule:#aeaaa0;
+    --signal:#c4491c; --accent:#8c3314; --on-signal:#ffffff; --pop:var(--signal);
+    --surface:#e3e0d9; --band:#cecbc2;
+    --hero-bg:#201e1c; --hero-bg2:#34302b; --hero-ink:#ddd9cf; --hero-accent:#ee6f3f;
+    --glow:rgba(238,111,63,.20);
+    --shadow:color-mix(in srgb,var(--ink) 38%,transparent);
+  }
+  [data-palette="sage"]{            /* Set 1: eggshell, tea green, teals, jungle */
+    --bg:#faf3dd;                   /* eggshell */
+    --ink:#233a2b;                  /* (derived) deep green for text */
+    --soft:#3f6b4d;                 /* (derived) from jungle teal */
+    --rule:#8fc0a9;                 /* muted teal */
+    --signal:#68b0ab; --pop:#68b0ab;/* tropical teal */
+    --accent:#3f6b4d;
+    --on-signal:#1f3527;
+    --surface:color-mix(in srgb,#c8d5b9 38%,#fbf6e6);   /* tea green, lifted */
+    --band:color-mix(in srgb,#c8d5b9 55%,#faf3dd);
+    --hero-bg:#2c5139; --hero-bg2:#437351;              /* deep green into jungle teal */
+    --hero-ink:#faf3dd; --hero-accent:#a5d6c0;
+    --glow:rgba(143,192,169,.32);
+  }
+  [data-palette="lagoon"]{          /* Set 2: pearl beige, ash grey, deep teal, camel */
+    --bg:#f6ecd0;                   /* pearl beige, lightened with cream */
+    --ink:#414535;                  /* charcoal brown */
+    --soft:color-mix(in srgb,#414535 88%,#f6ecd0);
+    --rule:color-mix(in srgb,#c19875 70%,#f6ecd0);      /* camel */
+    --signal:#c19875; --pop:#c19875;
+    --accent:#32524e;               /* (derived) from deep teal */
+    --on-signal:#2a2d20;
+    --surface:#fcf8ec;              /* lifted cream: cards no longer muddy */
+    --band:color-mix(in srgb,#96bbbb 32%,#f6ecd0);      /* ash grey as a sea-glass band */
+    --hero-bg:#2b4744; --hero-bg2:#41625f;              /* deep teal, darkened */
+    --hero-ink:#f6ecd0; --hero-accent:#dcb48c;          /* pearl + warm camel */
+    --glow:rgba(226,172,122,.17);
+    --shadow:color-mix(in srgb,#2b4744 45%,transparent);
+  }
+  [data-palette="bloom"]{           /* Set 3: plum, magenta, pinks, tan */
+    /* pastel pink #f8c0c8 diluted into a warm cream: a blush, not a flood */
+    --bg:color-mix(in srgb,#f8c0c8 30%,#fdf4ec);
+    --ink:#6b2d5c;                  /* royal plum */
+    --soft:color-mix(in srgb,#6b2d5c 92%,#f8c0c8);
+    --rule:color-mix(in srgb,#6b2d5c 32%,#fdf4ec);
+    --signal:color-mix(in srgb,#f0386b 72%,#6b2d5c);    /* magenta bloom, deepened so white text reads */
+    --pop:#f0386b;                  /* pure magenta, for small decorative touches */
+    --accent:#6b2d5c;
+    --on-signal:#ffffff;
+    --surface:color-mix(in srgb,#ffffff 55%,color-mix(in srgb,#f8c0c8 25%,#fdf4ec));
+    --band:color-mix(in srgb,#e2c290 38%,#fdf4ec);      /* tan */
+    --hero-bg:#4e1c44; --hero-bg2:#6b2d5c;
+    --hero-ink:#f8c0c8; --hero-accent:#e2c290;
+    --glow:rgba(240,56,107,.38);
+    --shadow:color-mix(in srgb,#6b2d5c 42%,transparent);
+  }
+  [data-palette="nocturne"]{        /* New, dark: midnight + amber */
+    color-scheme:dark;
+    --bg:#0f141c;                   /* midnight */
+    --ink:#e9e4d8;                  /* warm starlight */
+    --soft:#a9b1bd;
+    --rule:#34425a;
+    --signal:#e9a23b; --pop:#e9a23b;/* amber */
+    --accent:#f0b35a;
+    --on-signal:#10151d;
+    --surface:#171f2b;
+    --band:#141c29;
+    --hero-bg:#162133; --hero-bg2:#273b5c;
+    --hero-ink:#e9e4d8; --hero-accent:#f0b35a;
+    --glow:rgba(233,162,59,.20);
+    --shadow:rgba(0,0,0,.6);
+  }
+  [data-palette="polar"], [data-palette="auto"]{   /* New, light: ice + deep ocean. "auto" uses this in light mode */
+    color-scheme:light;
+    --bg:#e9f0f3;                   /* ice */
+    --ink:#12212b;
+    --soft:#465a68;
+    --rule:#b4c4cc;
+    --signal:#2f6f9a; --pop:#2f6f9a;/* cobalt steel */
+    --accent:#1f5f8b;
+    --on-signal:#ffffff;
+    --surface:color-mix(in srgb,#ffffff 60%,#e9f0f3);
+    --band:#dbe6eb;
+    --hero-bg:#0c2230; --hero-bg2:#1b4a63;
+    --hero-ink:#e9f0f3; --hero-accent:#86d0e6;
+    --glow:rgba(134,208,230,.28);
+    --shadow:color-mix(in srgb,#0c2230 40%,transparent);
+  }
+  /* "auto" in dark mode: same values as Nocturne above (keep both in sync) */
+  @media (prefers-color-scheme: dark){
+    [data-palette="auto"]{        /* New, dark: midnight + amber */
+    color-scheme:dark;
+    --bg:#0f141c;                   /* midnight */
+    --ink:#e9e4d8;                  /* warm starlight */
+    --soft:#a9b1bd;
+    --rule:#34425a;
+    --signal:#e9a23b; --pop:#e9a23b;/* amber */
+    --accent:#f0b35a;
+    --on-signal:#10151d;
+    --surface:#171f2b;
+    --band:#141c29;
+    --hero-bg:#162133; --hero-bg2:#273b5c;
+    --hero-ink:#e9e4d8; --hero-accent:#f0b35a;
+    --glow:rgba(233,162,59,.20);
+    --shadow:rgba(0,0,0,.6);
+  }
+  }
+
+  /* =========================================================
+     BASE
+     ========================================================= */
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Archivo",Arial,Helvetica,sans-serif;font-stretch:100%;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    transition:background .25s,color .25s;
+  }
+  a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--rule)}
+  a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+  ::selection{background:var(--pop);color:#fff}
+
+  .name{font-stretch:125%;font-weight:700;font-size:1.7rem;line-height:1.02;letter-spacing:-.01em;margin:0}
+  .role{margin:14px 0 0;color:var(--soft);font-size:.95rem;max-width:230px}
+  .dot{display:inline-block;width:9px;height:9px;background:var(--pop);border-radius:50%;margin-right:8px;transform:translateY(-1px)}
+  aside nav a{text-decoration:none;font-weight:500}
+  .side-foot{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--soft);line-height:1.7}
+
+  main section h2{font-stretch:125%;font-weight:600;font-size:.85rem;letter-spacing:.02em;margin:0 0 26px;color:var(--accent)}
+  .intro{font-stretch:88%;font-weight:300;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.12;letter-spacing:-.015em;margin:0 0 28px;max-width:760px}
+  .intro mark{background:none;color:var(--accent);font-weight:500}
+  .lede{max-width:560px;color:var(--soft);margin:0}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:760px}
+  .two p{margin:0;color:var(--soft)}
+
+  dl.skills{margin:0;max-width:760px;border-top:1px solid var(--rule)}
+  dl.skills div{display:grid;grid-template-columns:150px 1fr;padding:14px 0;border-bottom:1px solid var(--rule)}
+  dl.skills dt{font-weight:600}
+  dl.skills dd{margin:0;color:var(--soft)}
+
+  .proj{padding:30px 0;border-top:1px solid var(--rule);max-width:760px}
+  .proj:first-of-type{border-top:1px solid var(--ink)}
+  .proj .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .proj h3{margin:0;font-stretch:112%;font-weight:600;font-size:1.35rem}
+  .proj .year{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.04em;color:var(--accent);margin-bottom:8px}
+  .proj .tech{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--soft)}
+  .proj p{margin:12px 0 0;color:var(--soft);max-width:600px}
+  .proj ul{margin:12px 0 0;padding-left:18px;color:var(--soft);max-width:600px}
+  .proj li{margin-bottom:4px}
+  .proj .links{margin-top:16px;display:flex;gap:22px;font-weight:500;font-size:.95rem}
+
+  .contact p{color:var(--soft);max-width:520px;margin:0 0 28px}
+  .contact a.big{display:block;font-weight:400;font-size:1.1rem;margin-bottom:0;text-decoration:none;border-bottom:1px solid var(--rule);padding:14px 0;max-width:760px}
+  .contact a.big:hover{color:var(--accent);border-color:var(--accent)}
+
+  footer{padding:28px 0 36px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--rule);max-width:760px}
+
+  /* =========================================================
+     LAYOUT 1 · SIDE COLUMN  (original)
+     ========================================================= */
+  [data-layout="side"] .page{display:grid;grid-template-columns:300px 1fr;min-height:100vh;max-width:1180px;margin:0 auto}
+  [data-layout="side"] aside{padding:56px 40px 40px 32px;position:sticky;top:0;align-self:start;height:100vh;
+        display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--rule)}
+  [data-layout="side"] aside nav{display:flex;flex-direction:column;gap:6px;margin-top:40px}
+  [data-layout="side"] main{padding:56px 32px 0 64px}
+  [data-layout="side"] section{padding-bottom:84px}
+  @media (max-width:860px){
+    [data-layout="side"] .page{grid-template-columns:1fr}
+    [data-layout="side"] aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--rule);padding:32px 24px;gap:28px}
+    [data-layout="side"] aside nav{flex-direction:row;flex-wrap:wrap;gap:18px;margin-top:20px}
+    [data-layout="side"] main{padding:40px 24px 0}
+  }
+
+  /* =========================================================
+     LAYOUT 2 · CARDS  (colour hero, rounded cards, grid of projects)
+     ========================================================= */
+  [data-layout="cards"] .page{display:block}
+  [data-layout="cards"] aside{
+    display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px;
+    background:radial-gradient(760px 340px at 92% 0%,var(--glow),transparent 70%),linear-gradient(135deg,var(--hero-bg),var(--hero-bg2));
+    color:var(--hero-ink);
+    padding:48px max(24px,calc((100% - 1040px)/2)) 40px;border-radius:0 0 36px 36px}
+  [data-layout="cards"] aside > div:first-child{display:contents}
+  [data-layout="cards"] .name{flex-basis:100%;font-size:clamp(2.4rem,7vw,4.2rem);letter-spacing:-.02em}
+  [data-layout="cards"] .name br{display:none}
+  [data-layout="cards"] .role{flex:1;margin:0;max-width:none;color:color-mix(in srgb,var(--hero-ink) 80%,transparent)}
+  [data-layout="cards"] aside nav{display:flex;flex-wrap:wrap;gap:8px}
+  [data-layout="cards"] aside nav a{padding:6px 15px;border:1px solid color-mix(in srgb,var(--hero-ink) 45%,transparent);border-radius:99px;font-size:.92rem}
+  [data-layout="cards"] aside nav a:hover{background:var(--hero-ink);color:var(--hero-bg);border-color:var(--hero-ink)}
+  [data-layout="cards"] .side-foot{display:none}
+  [data-layout="cards"] main{max-width:1040px;margin:0 auto;padding:60px 24px 0}
+  [data-layout="cards"] section{padding-bottom:68px}
+  [data-layout="cards"] .two p{background:var(--surface);padding:24px;border-radius:18px;color:var(--ink);border:1px solid color-mix(in srgb,var(--rule) 55%,transparent);box-shadow:0 18px 34px -26px var(--shadow)}
+  [data-layout="cards"] .two{max-width:none}
+  [data-layout="cards"] #projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+  [data-layout="cards"] #projects h2{grid-column:1/-1;margin-bottom:6px}
+  [data-layout="cards"] .proj{background:var(--surface);border:1px solid color-mix(in srgb,var(--rule) 55%,transparent);border-radius:20px;padding:28px;max-width:none;box-shadow:0 22px 40px -28px var(--shadow)}
+  [data-layout="cards"] .proj:first-of-type{grid-column:1/-1;border-color:transparent;box-shadow:inset 0 0 0 2px var(--signal),0 24px 44px -28px var(--shadow)}
+  [data-layout="cards"] dl.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;border-top:none;max-width:none}
+  [data-layout="cards"] dl.skills div{display:block;background:var(--surface);border:1px solid color-mix(in srgb,var(--rule) 55%,transparent);border-radius:18px;padding:22px;box-shadow:0 16px 30px -24px var(--shadow)}
+  [data-layout="cards"] dl.skills dt{margin-bottom:6px;color:var(--accent)}
+  [data-layout="cards"] .contact a.big{display:inline-block;margin:0 10px 12px 0;padding:12px 24px;border:1px solid var(--ink);border-radius:99px;font-size:1.1rem;font-weight:500;max-width:none;font-stretch:100%}
+  [data-layout="cards"] .contact a.big:first-of-type{background:var(--signal);border-color:var(--signal);color:var(--on-signal)}
+  [data-layout="cards"] .contact a.big:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  [data-layout="cards"] footer{max-width:none}
+  @media (max-width:900px){
+    [data-layout="cards"] #projects{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:760px){
+    [data-layout="cards"] #projects{grid-template-columns:1fr}
+    [data-layout="cards"] .two{grid-template-columns:1fr;gap:16px}
+  }
+
+  /* =========================================================
+     LAYOUT 3 · EDITORIAL  (top bar, single column, headings in a left rail)
+     ========================================================= */
+  [data-layout="editorial"] .page{max-width:980px;margin:0 auto;padding:0 28px}
+  [data-layout="editorial"] aside{padding:26px 0 20px;border-bottom:2px solid var(--ink)}
+  [data-layout="editorial"] aside > div:first-child{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 36px}
+  [data-layout="editorial"] .name{order:1;margin-right:auto;font-size:1.45rem}
+  [data-layout="editorial"] .name br{display:none}
+  [data-layout="editorial"] aside nav{order:2;display:flex;flex-wrap:wrap;gap:6px 24px}
+  [data-layout="editorial"] .role{order:3;flex-basis:100%;max-width:none;margin:2px 0 0}
+  [data-layout="editorial"] .side-foot{display:none}
+  [data-layout="editorial"] main{padding:0}
+  [data-layout="editorial"] section{display:grid;grid-template-columns:170px 1fr;column-gap:40px;padding:54px 0;border-bottom:1px solid var(--rule)}
+  [data-layout="editorial"] section > *{grid-column:2}
+  [data-layout="editorial"] section > h2{grid-column:1;grid-row:1;margin:6px 0 0}
+  [data-layout="editorial"] .intro{font-size:clamp(2rem,4.4vw,3rem)}
+  [data-layout="editorial"] .two,[data-layout="editorial"] dl.skills,[data-layout="editorial"] .proj{max-width:none}
+  [data-layout="editorial"] .proj p,[data-layout="editorial"] .proj ul{max-width:640px}
+  [data-layout="editorial"] footer{max-width:none;border-top:none;padding:28px 0 40px}
+  @media (max-width:720px){
+    [data-layout="editorial"] section{grid-template-columns:1fr}
+    [data-layout="editorial"] section > h2,[data-layout="editorial"] section > *{grid-column:1}
+    [data-layout="editorial"] section > h2{grid-row:auto;margin-bottom:18px}
+    [data-layout="editorial"] .two{grid-template-columns:1fr;gap:16px}
+  }
+
+  /* =========================================================
+     LAYOUT 4 · BANDED  (sticky bar, big hero, full-width colour bands)
+     ========================================================= */
+  [data-layout="banded"]{scroll-padding-top:64px}
+  [data-layout="banded"] .page{display:block}
+  [data-layout="banded"] aside{
+    position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:var(--hero-bg);color:var(--hero-ink);
+    padding:14px max(24px,calc((100% - 960px)/2));
+    border-bottom:1px solid color-mix(in srgb,var(--hero-ink) 22%,transparent)}
+  [data-layout="banded"] aside > div:first-child{display:contents}
+  [data-layout="banded"] .name{font-size:1.1rem;letter-spacing:0}
+  [data-layout="banded"] .name br{display:none}
+  [data-layout="banded"] .role,[data-layout="banded"] .side-foot{display:none}
+  [data-layout="banded"] aside nav{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:.92rem}
+  [data-layout="banded"] aside a:hover{color:var(--hero-accent)}
+  [data-layout="banded"] main{padding:0}
+  [data-layout="banded"] section{padding:84px max(24px,calc((100% - 880px)/2))}
+  [data-layout="banded"] main > section:nth-child(3),
+  [data-layout="banded"] main > section:nth-child(5){background:var(--band)}
+  [data-layout="banded"] #about{background:radial-gradient(900px 520px at 88% -5%,var(--glow),transparent 68%),linear-gradient(160deg,var(--hero-bg),var(--hero-bg2));color:var(--hero-ink)}
+  [data-layout="banded"] #contact{background:radial-gradient(800px 460px at 6% 110%,var(--glow),transparent 68%),linear-gradient(20deg,var(--hero-bg),var(--hero-bg2));color:var(--hero-ink)}
+  [data-layout="banded"] #about{padding-top:130px;padding-bottom:130px}
+  [data-layout="banded"] #about .intro{font-size:clamp(2.4rem,6.5vw,4.6rem);max-width:900px}
+  [data-layout="banded"] #about .intro mark,[data-layout="banded"] #contact h2{color:var(--hero-accent)}
+  [data-layout="banded"] #about .lede,[data-layout="banded"] #contact p{color:color-mix(in srgb,var(--hero-ink) 78%,transparent)}
+  [data-layout="banded"] #contact a.big{border-bottom-color:color-mix(in srgb,var(--hero-ink) 28%,transparent)}
+  [data-layout="banded"] #contact a.big:hover{color:var(--hero-accent);border-color:var(--hero-accent)}
+  [data-layout="banded"] .two,[data-layout="banded"] dl.skills,[data-layout="banded"] .proj{max-width:none}
+  [data-layout="banded"] footer{max-width:none;background:var(--hero-bg);color:color-mix(in srgb,var(--hero-ink) 65%,transparent);
+        border-top:1px solid color-mix(in srgb,var(--hero-ink) 20%,transparent);padding:24px max(24px,calc((100% - 880px)/2))}
+  @media (max-width:760px){
+    [data-layout="banded"] .two{grid-template-columns:1fr;gap:16px}
+    [data-layout="banded"] section{padding-top:60px;padding-bottom:60px}
+  }
+
+  /* =========================================================
+     LAYOUT 5 · TIMELINE  (mission log: centred header, vertical line, numbered stages)
+     ========================================================= */
+  [data-layout="timeline"] .page{max-width:900px;margin:0 auto;padding:0 24px}
+  [data-layout="timeline"] aside{padding:68px 0 48px;text-align:center}
+  [data-layout="timeline"] aside > div:first-child{display:flex;flex-direction:column;align-items:center}
+  [data-layout="timeline"] .name{font-size:clamp(2.6rem,8vw,4.4rem);letter-spacing:-.02em}
+  [data-layout="timeline"] .name br{display:none}
+  [data-layout="timeline"] .role{max-width:none;margin-top:16px}
+  [data-layout="timeline"] aside nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px;margin-top:28px}
+  [data-layout="timeline"] .side-foot{display:none}
+  [data-layout="timeline"] main{--pad:48px;counter-reset:stage;margin-left:12px;padding-left:var(--pad);border-left:2px solid var(--rule)}
+  [data-layout="timeline"] section{position:relative;padding:0 0 72px}
+  [data-layout="timeline"] section::before{content:"";position:absolute;left:calc(-1 * var(--pad) - 9px);top:5px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--signal)}
+  [data-layout="timeline"] #about::before{background:var(--signal);top:16px}
+  [data-layout="timeline"] section h2{counter-increment:stage;display:flex;align-items:baseline;gap:12px;font-size:.9rem}
+  [data-layout="timeline"] section h2::before{content:"0" counter(stage);font-family:"IBM Plex Mono",monospace;font-weight:400;color:var(--soft)}
+  [data-layout="timeline"] .intro{font-size:clamp(2rem,4.6vw,3rem)}
+  [data-layout="timeline"] .two,[data-layout="timeline"] dl.skills,[data-layout="timeline"] .proj{max-width:none}
+  [data-layout="timeline"] footer{max-width:none;border-top:none;padding:0 0 44px}
+  @media (max-width:640px){
+    [data-layout="timeline"] .page{padding:0 16px}
+    [data-layout="timeline"] main{--pad:26px;margin-left:6px}
+    [data-layout="timeline"] .two{grid-template-columns:1fr;gap:16px}
+  }
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <aside>
+    <div>
+      <h1 class="name">Victor <br>Averseng</h1>
+      <p class="role"><span class="dot"></span>Space data, guidance &amp; automation</p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#competitions">Competitions</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="side-foot">
+      MP preparatory program<br>
+      France
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <p class="intro">I want to work on <mark>space data analysis</mark> and on the <mark>guidance and automation</mark> of space vehicles.</p>
+      <p class="lede">I'm a student in the French MP preparatory program (maths, physics and computer science).</p>
+    </section>
+
+    <section>
+      <h2>Background</h2>
+      <div class="two">
+        <p>My days are maths, physics and computer science. My evenings are Python and web code, usually about astronomy: where the Space Station is, what the planets look like, how to survive an asteroid field.</p>
+        <p>My TIPE is a guidance problem: how to keep the James Webb Space Telescope on its unstable orbit around the Sun–Earth L2 point. It is my most advanced work, and it shows how I like to work: take a physics problem, turn it into code, check that the numbers are right, and find where the model breaks.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <article class="proj">
+        <div class="year">2025–2026</div>
+        <div class="top"><h3>TIPE: Keeping the JWST on its orbit around L2</h3><span class="tech">Python · NumPy · SciPy · Matplotlib</span></div>
+        <p>Group project, theme "Cycles, boucles". Question: how can the position of the James Webb Space Telescope be adjusted so that it stays on its orbit around the Sun–Earth L2 point, an orbit that is unstable by nature? I wrote the whole simulation in Python from scratch (about 60 pages of code in the report's appendix).</p>
+        <ul>
+          <li>Circular restricted three-body problem in the rotating frame, with a Runge-Kutta 4 integrator I wrote myself after testing and rejecting the Rebound library, for lack of control over its methods. Validated by checking that the Jacobi constant is conserved, then compared with an inertial N-body simulation</li>
+          <li>Reference orbit: third-order Richardson approximation, refined into a periodic halo orbit by differential correction (single shooting with Newton iterations on the state transition matrix), a method suggested by the mathematician Emmanuel Trélat when we consulted him</li>
+          <li>Station-keeping: monodromy matrix, stable and unstable eigenvectors propagated along the orbit, and a velocity correction computed every 21 days</li>
+          <li>Result: starting from a 100 km error, the corrections keep the position error at a few hundred km for about 650 days (roughly three halo periods), against up to 10⁸ km without them. After that the reference orbit itself drifts, which is the main limit of the work</li>
+          <li>Other limits identified: the model ignores the Moon, solar radiation pressure and the seasonal variation of Earth's orbit</li>
+        </ul>
+        <div class="links">
+          <a href="https://github.com/TheAveron/TIPE-LAGRANGE" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="year">2024</div>
+        <div class="top"><h3>ISS Vision</h3><span class="tech">Python · Flask · SQLite · JavaScript</span></div>
+        <p>A web app built on orbital data that shows where the International Space Station is and where it will be.</p>
+        <ul>
+          <li>Live position, speed, altitude and crew on board</li>
+          <li>Trajectory over the coming hours and the next three passes above your location</li>
+          <li>Orbital elements (TLE) pulled from an external API and cached</li>
+          <li>Accounts that remember your map settings</li>
+        </ul>
+        <div class="links">
+          <a href="https://github.com/TheAveron/ISS-Vision" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="year">2023</div>
+        <div class="top"><h3>Wikispace</h3><span class="tech">HTML · CSS</span></div>
+        <p>A French-language wiki about the planets of the Solar System, built on a shared page template and hosted on GitHub Pages.</p>
+        <div class="links">
+          <a href="https://theaveron.github.io/Wikispace/" target="_blank" rel="noopener">Visit</a>
+          <a href="https://github.com/TheAveron/Wikispace" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="year">2023</div>
+        <div class="top"><h3>Whack-an-Asteroid</h3><span class="tech">Python</span></div>
+        <p>Whack-a-mole in space. Hit the asteroids, spare the friendly ships, reach level 10.</p>
+        <div class="links">
+          <a href="https://github.com/TheAveron/Whack-an-Asteroid" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <div><dt>Languages</dt><dd>Python, OCaml, JavaScript, TypeScript, HTML, CSS</dd></div>
+        <div><dt>Scientific computing</dt><dd>NumPy, SciPy, Matplotlib, NetworkX, numerical integration (RK4), Newton's method, state transition matrices, orbital data</dd></div>
+        <div><dt>Web</dt><dd>Flask, SQLite, React, external APIs</dd></div>
+        <div><dt>Tools</dt><dd>Git and GitHub, GitHub Pages, Visual Studio Code</dd></div>
+      </dl>
+    </section>
+
+    <section id="competitions">
+      <h2>Competitions</h2>
+      <dl class="skills">
+        <div><dt>Prologin 2026</dt><dd>National finalist, 43rd of 98 finalists. Prologin is France's national computer-science contest, with an online qualification, regional exams and a final in Paris. In the final I programmed a bot for a game made for the event: a 1v1 duel between mage cats.</dd></div>
+      </dl>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>For a question about a project, a collaboration, or a CV.</p>
+      <!-- TODO: replace with your real contact email -->
+      <a class="big" href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
+      <a class="big" href="https://www.linkedin.com/in/victor-averseng-a84698304/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="big" href="https://github.com/TheAveron" target="_blank" rel="noopener">GitHub</a>
+    </section>
+
+    <footer>© <span id="y">2026</span> Victor Averseng</footer>
+  </main>
+
+</div>
+
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
